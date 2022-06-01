@@ -1,4 +1,6 @@
 const express = require('express');
+const loginController = require('./controllers/loginController');
+const validateLogin = require('./Middlewares/loginValidade');
 const errorMiddlware = require('./Middlewares/erroMiddleware');
 
 // ...
@@ -9,7 +11,8 @@ app.use(express.json());
 
 // ...
 // Endpoint login post 
-app.post('/login');
+app.post('/login', validateLogin, loginController.userLogin);
+
 app.use(errorMiddlware);
 
 // É importante exportar a constante `app`,
