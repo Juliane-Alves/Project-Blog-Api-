@@ -1,5 +1,6 @@
 const generateJWT = require('../utils/generateJWT');
 const { User } = require('../database/models');
+const { Category } = require('../database/models');
 
 const erro = { status: 400, message: '"email" must be a valid email"' };
 // tentar cuidar do requisito 4, após, no momento to confusa, erro 500
@@ -29,8 +30,14 @@ const getUserId = async (id) => {
   return user;
 };
 
+const getCategories = async () => {
+  const categorieData = await Category.findAll();
+  return categorieData;
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUserId,
+  getCategories,
 };

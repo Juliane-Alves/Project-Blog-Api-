@@ -23,8 +23,10 @@ app.post('/user', validateUserDisplay, validadePassUser, userController.createUs
 app.get('/user', validateToken, userController.getUsers);
 
 // endpoint user por id get 
-
 app.get('/user/:id', validateToken, userController.getUserId);
+
+// endpoint get categories
+app.get('/categories', validateToken, userController.getCategories);
 
 app.use(errorMiddlware);
 

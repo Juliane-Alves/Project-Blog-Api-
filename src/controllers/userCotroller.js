@@ -1,5 +1,6 @@
 const service = require('../services/userLoginService');
 const userService = require('../services/userService');
+// const { Category } = require('../database/models');
 
 const createUser = async (req, res, next) => {
   try {
@@ -28,8 +29,13 @@ const getUserId = async (req, res) => {
   return res.status(200).json(userId);
 };
 
+const getCategories = async (req, res) => {
+  const categorieData = await userService.getCategories();
+  return res.status(200).json(categorieData);
+};
 module.exports = { 
     createUser,
     getUsers,
     getUserId,
+    getCategories,
 };
