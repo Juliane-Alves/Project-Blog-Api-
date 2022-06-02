@@ -3,6 +3,7 @@ const loginController = require('./controllers/loginController');
 const validateLogin = require('./Middlewares/loginValidade');
 const userController = require('./controllers/userCotroller');
 const { validateUserDisplay, validadePassUser } = require('./Middlewares/userValidate');
+const postController = require('./controllers/postController');
 const validateToken = require('./Middlewares/validateToken');
 const errorMiddlware = require('./Middlewares/erroMiddleware');
 
@@ -27,6 +28,12 @@ app.get('/user/:id', validateToken, userController.getUserId);
 
 // endpoint get categories
 app.get('/categories', validateToken, userController.getCategories);
+
+// endpoint get get post
+app.get('/post', validateToken, postController.getPosts);
+
+// endpoint get post id 
+app.get('/post/:id', validateToken, postController.getPostId);
 
 app.use(errorMiddlware);
 

@@ -2,17 +2,15 @@ const generateJWT = require('../utils/generateJWT');
 const { User } = require('../database/models');
 const { Category } = require('../database/models');
 
-const erro = { status: 400, message: '"email" must be a valid email"' };
-// tentar cuidar do requisito 4, após, no momento to confusa, erro 500
+const erro = { status: 409, message: 'User already registered' };
 const createUser = async (payload) => {
     const { email } = payload;
     const userEmail = await User.findOne({ where: { email } }); 
-    const user = await User.create(payload);
-    const userData = user && user.dataValues;
     
     if (userEmail) throw erro;
+    const user = await User.create(payload);
 
-    const { _password, ...payload2 } = userData;
+    const { _password, ...payload2 } = user;
     const token = generateJWT(payload2);
   
     return token;

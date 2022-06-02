@@ -1,12 +1,10 @@
-const service = require('../services/userLoginService');
+// const service = require('../services/userLoginService');
 const userService = require('../services/userService');
 // const { Category } = require('../database/models');
 
 const createUser = async (req, res, next) => {
   try {
-    const { displayName, email, password, image } = req.body;
-
-    const tokenUser = await service.createUser(displayName, email, password, image);
+    const tokenUser = await userService.createUser(req.body);
 
     return res.status(201).json({ token: tokenUser });
   } catch (error) {
