@@ -5,19 +5,19 @@ const getPosts = async () => {
     { 
       model: User, 
       as: 'user', // meu userProgredindo não foi :c
-      required: false, 
+      // required: false, 
       attributes: { exclude: ['password'] }, 
     },
     { 
       model: Category,
-      as: 'category',
+      as: 'categories',
       through: { attributes: [] },
     }] });
    return getPostsAll; 
 };
-
+const erro = { status: 404, message: 'Post does not exist' };
 const getPostId = async (id) => {
-  const postData = await BlogPost.findOne({ where: { id }, 
+  const postData = await BlogPost.findByPk(id, {
     include: [
     { 
       model: User, 
@@ -25,10 +25,10 @@ const getPostId = async (id) => {
       attributes: { exclude: ['password'] } },
     { 
       model: Category, 
-      as: 'category', 
+      as: 'categories', 
       through: { attributes: [] } },
   ] });
-  if (!postData) return false;
+  if (postData === null) throw erro;
   return postData;
 };
 
