@@ -22,6 +22,10 @@ app.post('/user', validateUserDisplay, validadePassUser, userController.createUs
 // endpoint getUser 
 app.get('/user', validateToken, userController.getUsers);
 
+// endpoint user por id get 
+
+app.get('/user/:id', validateToken, userController.getUserId);
+
 app.use(errorMiddlware);
 
 // É importante exportar a constante `app`,
